@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+
+import helper.HibernateFactory;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -47,6 +49,7 @@ public class RegisterServlet extends jakarta.servlet.http.HttpServlet {
 			response.sendRedirect("register.jsp");
 			sc.setAttribute("reg-empty", "Must Fill All The Data!");
 		} else {
+			new HibernateFactory().getFactory();
 			if (sc.getAttribute("reg-empty") != null) {
 				sc.removeAttribute("reg-empty");
 			}
