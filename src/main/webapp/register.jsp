@@ -11,7 +11,7 @@
 	<%@include file="components/navbar.jsp"%>
 	<div class="container">
 		<div class="row">
-			<div class="col=10 mx-auto">
+			<div class="col-10 mx-auto">
 				<form class="row g-3">
 					<h2 class="mt-5">Register</h2>
 					<hr />
@@ -39,7 +39,7 @@
 					</div>
 
 					<div class="col-12">
-						<button type="submit" class="btn btn-primary">Sign in</button>
+						<button type="submit" class="btn btn-primary">Sign Up</button>
 					</div>
 				</form>
 			</div>
