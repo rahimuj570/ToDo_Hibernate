@@ -12,7 +12,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-10 mx-auto">
-				<form class="row g-3">
+				<form action="RegisterServlet" method="post" class="row g-3">
 					<h2 class="mt-5">Register</h2>
 					<hr />
 					<div class="col-12">
@@ -30,7 +30,7 @@
 							id="inputPassword4">
 					</div>
 					<div class="col-md-4">
-						<label for="inputState" class="form-label">Gender</label> <select
+						<label for="inputState" class="form-label">Gender</label> <select name="gender"
 							id="inputState" class="form-select">
 							<option selected value="0">Choose...</option>
 							<option value="1">Male</option>
@@ -46,6 +46,13 @@
 
 		</div>
 	</div>
+
 </body>
 <%@include file="components/alljs.jsp"%>
+<script type="text/javascript">
+<%if(session.getAttribute("reg-empty")!=null){%>
+alert("<%=session.getAttribute("reg-empty")%>")
+<%}%>
+
+</script>
 </html>
