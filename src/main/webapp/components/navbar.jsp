@@ -23,13 +23,13 @@
         </li>
         
          <li class="nav-item">
-          <a class="nav-link" href="#">Login</a>
+          <a class="nav-link" href="login.jsp">Login</a>
         </li>
          <li class="nav-item">
           <a class="nav-link" href="#">Logout</a>
         </li>
                 <li class="nav-item">
-          <a class="nav-link" href="#">Sign Up</a>
+          <a class="nav-link" href="register.jsp">Sign Up</a>
         </li>
         
       </ul>
