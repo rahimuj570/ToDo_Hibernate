@@ -5,18 +5,19 @@ import org.hibernate.cfg.Configuration;
 
 public class HibernateFactory {
 
-	public static SessionFactory fact = null;
-
-	public static SessionFactory getFactory() {
-		Configuration cfg = new Configuration();
-		cfg.configure("hibernate.cfg.xml");
-		fact = cfg.buildSessionFactory();
-		return fact;
+	public SessionFactory session_fact = null;
+	public SessionFactory getFactory() {
+		if (session_fact == null) {
+			Configuration cfg = new Configuration();
+			cfg.configure("hibernate.cfg.xml");
+			session_fact = cfg.buildSessionFactory();
+		}
+		return session_fact;
 	}
 
-	public static void CloseFactory() {
-		if (fact != null)
-			fact.close();
+	public void CloseFactory() {
+		if (session_fact.isOpen())
+			session_fact.close();
 	}
 
 }

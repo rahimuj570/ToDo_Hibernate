@@ -2,6 +2,8 @@ package servlets;
 
 import java.io.IOException;
 
+import dao.UsersDao;
+import entities.Users;
 import helper.HibernateFactory;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -49,13 +51,18 @@ public class RegisterServlet extends jakarta.servlet.http.HttpServlet {
 			response.sendRedirect("register.jsp");
 			sc.setAttribute("reg-empty", "Must Fill All The Data!");
 		} else {
-			new HibernateFactory().getFactory();
 			if (sc.getAttribute("reg-empty") != null) {
 				sc.removeAttribute("reg-empty");
 			}
+			Users u = new Users();
+			u.setUser_email(email);
+			u.setUser_name(name);
+			u.setUser_password(password);
+			u.setUser_gender(gender.equals("1") ? "Male" : "Female");
+			UsersDao dao=new UsersDao();
+			dao.addUser(u);
 		}
 
-		System.out.println(name + " " + email + " " + password + " " + gender);
 	}
 
 }
