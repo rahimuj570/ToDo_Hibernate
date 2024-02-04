@@ -61,6 +61,7 @@ public class RegisterServlet extends jakarta.servlet.http.HttpServlet {
 			u.setUser_gender(gender.equals("1") ? "Male" : "Female");
 			UsersDao dao=new UsersDao();
 			dao.addUser(u);
+			response.sendRedirect("login.jsp");
 		}
 
 	}

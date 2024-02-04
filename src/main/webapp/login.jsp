@@ -12,7 +12,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-8 mx-auto">
-				<form class="row g-3">
+				<form action="LoginServlet" method="post" class="row g-3">
 				<h2 class="mt-5">Login</h2>
 				<hr/>
 					<div class="col-md-12">
