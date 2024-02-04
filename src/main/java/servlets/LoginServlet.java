@@ -33,17 +33,17 @@ public class LoginServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
+		System.out.println(email+password);
 		UsersDao dao = new UsersDao();
 		Users u = dao.isValidUser(email, password);
 		HttpSession sc = request.getSession();
 		if (u == null) {
-			sc.setAttribute("user_not_found", "User Not Found");
+			response.getWriter().append("user_not_found");
 		} else {
 			if (sc.getAttribute("user_not_found") != null) {
 				sc.removeAttribute("user_not_found");
 			}
 			sc.setAttribute("current_user", u);
-			response.sendRedirect("/ToDo_maven_hibernate");
 		}
 	}
 
