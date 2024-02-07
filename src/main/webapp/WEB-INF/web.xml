@@ -4,6 +4,16 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <filter>
+  	<filter-name>CurrentUserFilter</filter-name>
+  	<display-name>CurrentUserFilter</display-name>
+  	<description></description>
+  	<filter-class>Filters.CurrentUserFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>CurrentUserFilter</filter-name>
+  	<url-pattern>/index.jsp</url-pattern>
+  </filter-mapping>
   <servlet>
   	<servlet-name>RegisterServlet</servlet-name>
   	<display-name>RegisterServlet</display-name>

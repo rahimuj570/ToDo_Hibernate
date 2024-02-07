@@ -1,3 +1,7 @@
+<%@page import="entities.Users"%>
+<%@page import="entities.Todo"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="dao.TodoDao"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -45,14 +49,24 @@
 		<div class="row">
 			<div class="col-md-8 mx-auto mt-5">
 				<div class="list-group">
-					<div style="cursor:pointer;" class="mb-2 list-group-item list-group-item-action"
+
+					<%
+					Users u= (Users)session.getAttribute("current_user");
+	
+					TodoDao dao = new TodoDao();
+					ArrayList<Todo> todos = dao.getAllTodo(u.getUser_id());
+					%>
+
+					<div style="cursor: pointer;"
+						class="mb-2 list-group-item list-group-item-action"
 						aria-current="true">
 						<div class="d-flex w-100 justify-content-between">
 							<h5 class="mb-1">List group item heading</h5>
 							<button class="btn btn-success">Done</button>
 						</div>
-						<p class="mb-1">Some placeholder content in a paragraph.</p> <small>12-12-2024 2:20 pm</small>
-					</div> 
+						<p class="mb-1">Some placeholder content in a paragraph.</p>
+						<small>12-12-2024 2:20 pm</small>
+					</div>
 				</div>
 			</div>
 		</div>
