@@ -29,7 +29,7 @@
 					</div>
 					<div class="col-12 align-items-center">
 						<label for="inputAddress2" class="form-label">Details</label> <br />
-						<textarea class="w-100" id="details"></textarea>
+						<textarea name="details" class="w-100" id="details"></textarea>
 					</div>
 
 					<div class="col-12">
@@ -49,27 +49,50 @@
 		return String(a).length;
 	}
 	let d=new Date();
+	let year;
+	let month;
+	let current_date;
+	let date;
+	let time_node;
 	const refresh=()=>{
 		d=new Date();
-		let year = d.getFullYear();
-		let month = digitCount((parseInt(d.getMonth()) + 1)) == 2 ? (parseInt(d
+		year = d.getFullYear();
+		month = digitCount((parseInt(d.getMonth()) + 1)) == 2 ? (parseInt(d
 				.getMonth()) + 1) : ("0" + (parseInt(d.getMonth()) + 1));
-		let date = digitCount(parseInt(d.getDate())) == 2 ? d.getDate() : ("0" + d
+		date = digitCount(parseInt(d.getDate())) == 2 ? d.getDate() : ("0" + d
 				.getDate());
 		document.getElementById("date").setAttribute("min", year+"-"+month+"-"+date);
 		document.getElementById("date").setAttribute("value", year+"-"+month+"-"+date);
-		let current_time = d.toLocaleString("en-US",{
+		current_time = d.toLocaleString("en-US",{
 			hour12: false,
 			hour:'2-digit',
 			minute:"2-digit"
 		})
-		let timeNode = document.getElementById("time");
+		timeNode = document.getElementById("time");
 		timeNode.setAttribute("min", current_time);
 		d.setMinutes(d.getMinutes()+10);
 		timeNode.setAttribute("value", d.toLocaleTimeString('en-us',{'hour12':false, hour:'2-digit', minute:"2-digit"}));
+		
 		console.log("change")
 	}
 	setInterval(refresh,5000);
+	
+	year = d.getFullYear();
+	month = digitCount((parseInt(d.getMonth()) + 1)) == 2 ? (parseInt(d
+			.getMonth()) + 1) : ("0" + (parseInt(d.getMonth()) + 1));
+	date = digitCount(parseInt(d.getDate())) == 2 ? d.getDate() : ("0" + d
+			.getDate());
+	document.getElementById("date").setAttribute("min", year+"-"+month+"-"+date);
+	document.getElementById("date").setAttribute("value", year+"-"+month+"-"+date);
+	current_time = d.toLocaleString("en-US",{
+		hour12: false,
+		hour:'2-digit',
+		minute:"2-digit"
+	})
+	timeNode = document.getElementById("time");
+	timeNode.setAttribute("min", current_time);
+	d.setMinutes(d.getMinutes()+10);
+	timeNode.setAttribute("value", d.toLocaleTimeString('en-us',{'hour12':false, hour:'2-digit', minute:"2-digit"}));
 	
 	
 </script>

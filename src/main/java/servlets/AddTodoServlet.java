@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 
+import dao.TodoDao;
 import entities.Todo;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -37,8 +38,9 @@ public class AddTodoServlet extends HttpServlet {
 		todo.setTodo_details(details);
 		todo.setTodo_headline(headline);
 		todo.setTodo_time(time);
-		
 		System.out.println(todo);
+		new TodoDao().addTodo(todo);
+		response.sendRedirect("/ToDo_maven_hibernate");
 	}
 
 	/**
