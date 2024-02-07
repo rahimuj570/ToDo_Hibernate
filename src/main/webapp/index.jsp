@@ -55,18 +55,21 @@
 	
 					TodoDao dao = new TodoDao();
 					ArrayList<Todo> todos = dao.getAllTodo(u.getUser_id());
+					for(Todo t: todos){
 					%>
 
 					<div style="cursor: pointer;"
 						class="mb-2 list-group-item list-group-item-action"
 						aria-current="true">
 						<div class="d-flex w-100 justify-content-between">
-							<h5 class="mb-1">List group item heading</h5>
+							<h5 class="mb-1"><%=t.getTodo_headline() %></h5>
 							<button class="btn btn-success">Done</button>
 						</div>
-						<p class="mb-1">Some placeholder content in a paragraph.</p>
-						<small>12-12-2024 2:20 pm</small>
+						<p class="mb-1"><%=t.getTodo_details() %></p>
+						<small><%=t.getTodo_date() %> ; <%=t.getTodo_time() %></small>
 					</div>
+					
+					<%} %>
 				</div>
 			</div>
 		</div>
