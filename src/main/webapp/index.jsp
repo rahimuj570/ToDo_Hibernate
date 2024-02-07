@@ -45,7 +45,7 @@
 		<div class="row">
 			<div class="col-md-8 mx-auto mt-5">
 				<div class="list-group">
-					<div style="cursor:pointer;" class="list-group-item list-group-item-action"
+					<div style="cursor:pointer;" class="mb-2 list-group-item list-group-item-action"
 						aria-current="true">
 						<div class="d-flex w-100 justify-content-between">
 							<h5 class="mb-1">List group item heading</h5>

@@ -17,5 +17,9 @@ public class TodoDao {
 		tx.commit();
 		s.close();
 	}
+	
+//	public ArrayList<Todo> getAllTodo(){
+//		
+//	}
 
 }
