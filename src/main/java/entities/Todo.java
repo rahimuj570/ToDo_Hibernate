@@ -16,6 +16,25 @@ public class Todo {
 	private String todo_time;
 	private String todo_details;
 	private int user_id;
+	private boolean isExpired; //time expired status before done
+	private boolean isDone; //done status before time expire
+	
+
+	public boolean isExpired() {
+		return isExpired;
+	}
+
+	public void setExpired(boolean isExpired) {
+		this.isExpired = isExpired;
+	}
+
+	public boolean isDone() {
+		return isDone;
+	}
+
+	public void setDone(boolean isDone) {
+		this.isDone = isDone;
+	}
 
 	public int getUser_id() {
 		return user_id;
