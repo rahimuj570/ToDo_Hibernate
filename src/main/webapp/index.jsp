@@ -14,7 +14,7 @@
 		<div class="row">
 			<div class="col-md-6 mx-auto mt-5 px-3 px-md-0">
 
-				<form class="row g-3">
+				<form action="AddTodoServlet" class="row g-3">
 					<div class="col-md-12">
 						<label for="inputEmail4" class="form-label">Headline</label> <input required
 							name="headline" type="text" class="form-control" id="headline">
@@ -48,19 +48,29 @@
 	function digitCount(a) {
 		return String(a).length;
 	}
-	const d = new Date();
-	let year = d.getFullYear();
-	let month = digitCount((parseInt(d.getMonth()) + 1)) == 2 ? (parseInt(d
-			.getMonth()) + 1) : ("0" + (parseInt(d.getMonth()) + 1));
-	let date = digitCount(parseInt(d.getDate())) == 2 ? d.getDate() : ("0" + d
-			.getDate());
-	document.getElementById("date").setAttribute("min", year+"-"+month+"-"+date);
-	let current_time = d.toLocaleString("en-US",{
-		hour12: false,
-		hour:'2-digit',
-		minute:"2-digit"
-	})
-	let timeNode = document.getElementById("time");
-	timeNode.setAttribute("min", current_time);
+	let d=new Date();
+	const refresh=()=>{
+		d=new Date();
+		let year = d.getFullYear();
+		let month = digitCount((parseInt(d.getMonth()) + 1)) == 2 ? (parseInt(d
+				.getMonth()) + 1) : ("0" + (parseInt(d.getMonth()) + 1));
+		let date = digitCount(parseInt(d.getDate())) == 2 ? d.getDate() : ("0" + d
+				.getDate());
+		document.getElementById("date").setAttribute("min", year+"-"+month+"-"+date);
+		document.getElementById("date").setAttribute("value", year+"-"+month+"-"+date);
+		let current_time = d.toLocaleString("en-US",{
+			hour12: false,
+			hour:'2-digit',
+			minute:"2-digit"
+		})
+		let timeNode = document.getElementById("time");
+		timeNode.setAttribute("min", current_time);
+		d.setMinutes(d.getMinutes()+10);
+		timeNode.setAttribute("value", d.toLocaleTimeString('en-us',{'hour12':false, hour:'2-digit', minute:"2-digit"}));
+		console.log("change")
+	}
+	setInterval(refresh,5000);
+	
+	
 </script>
 </html>

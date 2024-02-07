@@ -22,6 +22,12 @@
   	<description></description>
   	<servlet-class>servlets.LogoutServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>AddTodoServlet</servlet-name>
+  	<display-name>AddTodoServlet</display-name>
+  	<description></description>
+  	<servlet-class>servlets.AddTodoServlet</servlet-class>
+  </servlet>
 
   <servlet-mapping>
   	<servlet-name>RegisterServlet</servlet-name>
@@ -34,6 +40,10 @@
   <servlet-mapping>
   	<servlet-name>LogoutServlet</servlet-name>
   	<url-pattern>/LogoutServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AddTodoServlet</servlet-name>
+  	<url-pattern>/AddTodoServlet</url-pattern>
   </servlet-mapping>
 
 
