@@ -54,16 +54,26 @@ public class TodoDao {
 		s.close();
 		return todos;
 	}
-	
+
+	public ArrayList<String> getAlldate(int uid) {
+		ArrayList<String> alldate = new ArrayList<String>();
+		SessionFactory sf = new HibernateFactory().getFactory();
+		Session s = sf.openSession();
+		Query q = s.createQuery("select distinct t.todo_date from Todo t where t.user_id=:uid and t.isExpired=false and t.isDone=false", Todo.class);
+		q.setParameter("uid", uid);
+		alldate = (ArrayList<String>) q.list();
+		return alldate;
+	}
+
 	public void deleteTodo(int todo_id) {
 		SessionFactory sf = new HibernateFactory().getFactory();
 		Session s = sf.openSession();
-		if(todo_id==0) {
+		if (todo_id == 0) {
 			MutationQuery q = s.createMutationQuery("delete Todo where isDone=true");
 			Transaction tx = s.beginTransaction();
 			q.executeUpdate();
 			tx.commit();
-		}else {
+		} else {
 			Todo todo = s.get(Todo.class, todo_id);
 			Transaction tx = s.beginTransaction();
 			s.remove(todo);
@@ -115,15 +125,22 @@ public class TodoDao {
 		return res;
 	}
 
-	public ArrayList<Todo> getAllTodo(int uid) {
+	public ArrayList<Todo> getAllTodo(int uid, String targetDate) {
 		ArrayList<Todo> todos = new ArrayList<Todo>();
 		ArrayList<Todo> finalTodos = new ArrayList<Todo>();
 
 		SessionFactory sf = new HibernateFactory().getFactory();
 		Session s = sf.openSession();
-		String query = "from Todo t where t.user_id=:user_id and t.isExpired =false and t.isDone=false";
+		String query = null;
+		if (targetDate.equals("0")) {
+			query = "from Todo t where t.user_id=:user_id and t.isExpired =false and t.isDone=false";
+		} else {
+			query = "from Todo t where t.todo_date=:targetDate and t.user_id=:user_id and t.isExpired =false and t.isDone=false";
+		}
 		Query q = s.createQuery(query, Todo.class);
 		q.setParameter("user_id", uid);
+		if (!targetDate.equals("0"))
+			q.setParameter("targetDate", targetDate);
 		todos = (ArrayList<Todo>) q.list();
 		s.close();
 		for (Todo t : todos) {

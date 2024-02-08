@@ -53,18 +53,23 @@
 			<div class="col-md-8 mx-auto mt-5">
 				<div class="text-center">
 					<h3 class="mb-2">Pending Task</h3>
-					<div id="refresh_loader"  style="cursor:pointer;">
+					<div id="refresh_loader" style="cursor: pointer;">
 						<i class="fa-solid fa-rotate-right fa-2xl"></i>
 					</div>
 				</div>
 				<div class="list-group mt-2 mb-5">
 
 					<%
+					String targetDate="0";
+					if (request.getParameter("targetDate") == null)
+						targetDate = "0";
+					else targetDate= request.getParameter("targetDate");
 					Users u = (Users) session.getAttribute("current_user");
 
 					TodoDao dao = new TodoDao();
-					ArrayList<Todo> todos = dao.getAllTodo(u.getUser_id());
-					if(todos.isEmpty())out.print("<center class=\"mt-2\">0 pending Task</center>");
+					ArrayList<Todo> todos = dao.getAllTodo(u.getUser_id(), targetDate);
+					if (todos.isEmpty())
+						out.print("<center class=\"mt-2\">0 pending Task</center>");
 					for (Todo t : todos) {
 					%>
 
@@ -73,21 +78,21 @@
 						aria-current="true">
 						<div class="d-flex w-100 justify-content-between">
 							<h5 class="mb-1"><%=t.getTodo_headline()%></h5>
-							<button onclick="doneTask(<%=t.getTodo_id() %>)" class="btn btn-success">Done</button>
+							<button onclick="doneTask(<%=t.getTodo_id()%>)"
+								class="btn btn-success">Done</button>
 						</div>
 						<p class="mb-1"><%=t.getTodo_details()%></p>
-						<small>
-							<%
-							SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
-							Date d2 = sdf2.parse(t.getTodo_date());
-							String date = new SimpleDateFormat("EEE, MMM d, yyyy").format(d2);
-							out.print(date);
-							%> || <%
-							SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-							Date d = sdf.parse(t.getTodo_time());
-							String time = new SimpleDateFormat("hh:mm aa").format(d);
-							out.print(time);
-							%>
+						<small> <%
+ SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+ Date d2 = sdf2.parse(t.getTodo_date());
+ String date = new SimpleDateFormat("EEE, MMM d, yyyy").format(d2);
+ out.print(date);
+ %> || <%
+ SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+ Date d = sdf.parse(t.getTodo_time());
+ String time = new SimpleDateFormat("hh:mm aa").format(d);
+ out.print(time);
+ %>
 						</small>
 					</div>
 

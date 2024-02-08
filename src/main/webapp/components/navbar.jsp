@@ -1,3 +1,6 @@
+<%@page import="entities.Users"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="dao.TodoDao"%>
 <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
 	<div class="container-fluid">
 		<a class="navbar-brand" href="/ToDo_maven_hibernate">ToDo</a>
@@ -12,22 +15,31 @@
 				<li class="nav-item"><a class="nav-link active"
 					aria-current="page" href="/ToDo_maven_hibernate">Home</a></li>
 
+				<%
+				Users userNav = new Users();
+				userNav = (Users) session.getAttribute("current_user");
+				if (userNav != null) {
+				%>
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" role="button"
 					data-bs-toggle="dropdown" aria-expanded="false"> Date </a>
 					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="#">Action</a></li>
-						<li><a class="dropdown-item" href="#">Another action</a></li>
-						<li><hr class="dropdown-divider"></li>
-						<li><a class="dropdown-item" href="#">Something else here</a></li>
-					</ul></li>
+
 						<%
-						if (session.getAttribute("current_user") != null) {
+						ArrayList<String> allDate;
+						allDate = new TodoDao().getAlldate(userNav.getUser_id());
+						for(String s:allDate){
 						%>
+
+						<li><a class="dropdown-item" href="<%="?targetDate="+s%>"><%=s %></a></li>
+						<%} %>
+						<li><hr class="dropdown-divider"></li>
+						<li><a class="dropdown-item" href="index.jsp">View All Pending Tasks</a></li>
+					</ul></li>
 				<li class="nav-item"><a class="nav-link"
 					href="missed_tasks.jsp">Missed Tasks</a></li>
-				<li class="nav-item"><a class="nav-link" href="completed_tasks.jsp">Completed
-						Tasks</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="completed_tasks.jsp">Completed Tasks</a></li>
 				<li class="nav-item"><a class="nav-link" href="LogoutServlet">Logout</a></li>
 				<%
 				} else {
