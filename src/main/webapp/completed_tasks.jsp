@@ -47,7 +47,7 @@ count = todos.size();
 						aria-current="true">
 						<div class="d-flex w-100 justify-content-between">
 							<h5 class="mb-1"><%=t.getTodo_headline()%></h5>
-							<button title="1day will extend" onclick="retrive_todo(<%=t.getTodo_id()%>)"
+							<button title="1day will extend" onclick="delete_todo(<%=t.getTodo_id()%>)"
 								class="btn btn-danger">Delete</button>
 						</div>
 						<p class="mb-1"><%=t.getTodo_details()%></p>
@@ -69,6 +69,11 @@ count = todos.size();
 					}
 					%>
 				</div>
+				<%if(!todos.isEmpty()){ %>
+				<div class="text-center">
+				<button onclick="delete_todo(0)" class="btn btn-danger">Clear All Completed Tasks</button>
+				</div>
+				<%} %>
 			</div>
 		</div>
 	</div>
@@ -76,7 +81,7 @@ count = todos.size();
 </body>
 <%@include file="components/alljs.jsp"%>
 <script type="text/javascript">
-let retrive_todo=(id)=>{
+let delete_todo=(id)=>{
 	location="DeleteTask?task_id="+id;
 }
 </script>
