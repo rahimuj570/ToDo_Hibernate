@@ -54,6 +54,17 @@ public class TodoDao {
 		s.close();
 		return todos;
 	}
+	
+	public void doneTodo(int todo_id) {
+		SessionFactory sf = new HibernateFactory().getFactory();
+		Session s = sf.openSession();
+		Todo todo = s.get(Todo.class, todo_id);
+		todo.setDone(true);
+		Transaction tx = s.beginTransaction();
+		s.merge(todo);
+		tx.commit();
+		s.close();
+	}
 
 	public int retriveTodo(int todo_id) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

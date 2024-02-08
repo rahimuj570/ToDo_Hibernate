@@ -48,6 +48,12 @@
   	<description></description>
   	<servlet-class>servlets.RetriveTask</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>DoneTask</servlet-name>
+  	<display-name>DoneTask</display-name>
+  	<description></description>
+  	<servlet-class>servlets.DoneTask</servlet-class>
+  </servlet>
 
   <servlet-mapping>
   	<servlet-name>RegisterServlet</servlet-name>
@@ -68,6 +74,10 @@
   <servlet-mapping>
   	<servlet-name>RetriveTask</servlet-name>
   	<url-pattern>/RetriveTask</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>DoneTask</servlet-name>
+  	<url-pattern>/DoneTask</url-pattern>
   </servlet-mapping>
 
 

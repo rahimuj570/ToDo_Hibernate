@@ -73,7 +73,7 @@
 						aria-current="true">
 						<div class="d-flex w-100 justify-content-between">
 							<h5 class="mb-1"><%=t.getTodo_headline()%></h5>
-							<button class="btn btn-success">Done</button>
+							<button onclick="doneTask(<%=t.getTodo_id() %>)" class="btn btn-success">Done</button>
 						</div>
 						<p class="mb-1"><%=t.getTodo_details()%></p>
 						<small>
@@ -152,6 +152,7 @@
 	d.setMinutes(d.getMinutes()+10);
 	timeNode.setAttribute("value", d.toLocaleTimeString('en-us',{'hour12':false, hour:'2-digit', minute:"2-digit"}));
 	
+	const doneTask=(id)=>location="DoneTask?todo_id="+id;
 	
 </script>
 </html>
