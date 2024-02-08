@@ -27,7 +27,9 @@ count = todos.size();
 		<div class="row">
 			<div class="col-md-8 mx-auto mt-5">
 				<div class="text-center">
-					<h3 class="mb-2">Missed Task (<%=count %>)</h3>
+					<h3 class="mb-2">
+						Missed Task (<%=count%>)
+					</h3>
 					<div id="refresh_loader" style="cursor: pointer;">
 						<i class="fa-solid fa-rotate-right fa-2xl"></i>
 					</div>
@@ -45,7 +47,8 @@ count = todos.size();
 						aria-current="true">
 						<div class="d-flex w-100 justify-content-between">
 							<h5 class="mb-1"><%=t.getTodo_headline()%></h5>
-							<button class="btn btn-info">Try Again</button>
+							<button onclick="retrive_todo(<%=t.getTodo_id()%>)"
+								class="btn btn-info">Try Again</button>
 						</div>
 						<p class="mb-1"><%=t.getTodo_details()%></p>
 						<small> <%
@@ -72,4 +75,9 @@ count = todos.size();
 
 </body>
 <%@include file="components/alljs.jsp"%>
+<script type="text/javascript">
+let retrive_todo=(id)=>{
+	location="RetriveTask?task_id="+id;
+}
+</script>
 </html>

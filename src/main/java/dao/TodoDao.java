@@ -44,16 +44,37 @@ public class TodoDao {
 		tx.commit();
 		s.close();
 	}
-	
-	
-	public ArrayList<Todo> getExpiredTodo(int uid){
-		ArrayList<Todo>todos=new ArrayList<Todo>();
+
+	public ArrayList<Todo> getExpiredTodo(int uid) {
+		ArrayList<Todo> todos = new ArrayList<Todo>();
 		SessionFactory sf = new HibernateFactory().getFactory();
-		Session s= sf.openSession();
-		Query q= s.createQuery("from Todo t where t.isExpired=true",Todo.class);
-		todos=(ArrayList<Todo>) q.list();
+		Session s = sf.openSession();
+		Query q = s.createQuery("from Todo t where t.isExpired=true", Todo.class);
+		todos = (ArrayList<Todo>) q.list();
 		s.close();
 		return todos;
+	}
+
+	public int retriveTodo(int todo_id) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf2 = new SimpleDateFormat("HH:MM");
+		Date d = new Date();
+		d.setTime(d.getTime()+24*60*60*1000);
+		String newDate = sdf.format(d);
+		String newTime = sdf2.format(d);
+
+		SessionFactory sf = new HibernateFactory().getFactory();
+		Session s = sf.openSession();
+		Transaction tx = s.beginTransaction();
+		MutationQuery q = s.createMutationQuery(
+				"update Todo set isExpired=false, todo_time=:newTime, todo_date=:newDate where todo_id=:todoId");
+		q.setParameter("todoId", todo_id);
+		q.setParameter("newTime", newTime);
+		q.setParameter("newDate", newDate);
+		int res = q.executeUpdate();
+		tx.commit();
+		s.close();
+		return res;
 	}
 
 	public ArrayList<Todo> getAllTodo(int uid) {
@@ -67,19 +88,19 @@ public class TodoDao {
 		q.setParameter("user_id", uid);
 		todos = (ArrayList<Todo>) q.list();
 		s.close();
-		for(Todo t: todos) {
-			if(isExpired(t.getTodo_date(), t.getTodo_time())) {
+		for (Todo t : todos) {
+			if (isExpired(t.getTodo_date(), t.getTodo_time())) {
 				System.out.println("tttttttttt");
-				Session s2= sf.openSession();
-				String query2="update Todo set isExpired=:t where todo_id=:todo_id";
+				Session s2 = sf.openSession();
+				String query2 = "update Todo set isExpired=:t where todo_id=:todo_id";
 				MutationQuery q2 = s2.createMutationQuery(query2);
 				q2.setParameter("todo_id", t.getTodo_id());
 				q2.setParameter("t", true);
-				Transaction tx= s2.beginTransaction();
+				Transaction tx = s2.beginTransaction();
 				q2.executeUpdate();
 				tx.commit();
 				s2.close();
-			}else {
+			} else {
 				finalTodos.add(t);
 			}
 		}

@@ -20,10 +20,10 @@
 						<li><a class="dropdown-item" href="#">Another action</a></li>
 						<li><hr class="dropdown-divider"></li>
 						<li><a class="dropdown-item" href="#">Something else here</a></li>
+					</ul></li>
 						<%
 						if (session.getAttribute("current_user") != null) {
 						%>
-					</ul></li>
 				<li class="nav-item"><a class="nav-link"
 					href="missed_tasks.jsp">Missed Tasks</a></li>
 				<li class="nav-item"><a class="nav-link" href="completed_tasks.jsp">Completed
