@@ -51,7 +51,12 @@
 
 		<div class="row">
 			<div class="col-md-8 mx-auto mt-5">
-			<h3 class="mb-2 text-center">Pending Task</h3>
+				<center>
+					<h3 class="mb-2">Pending Task</h3>
+					<div id="refresh_loader"  style="cursor:pointer;">
+						<i class="fa-solid fa-rotate-right fa-2xl"></i>
+					</div>
+				</center>
 				<div class="list-group">
 
 					<%
@@ -70,18 +75,19 @@
 							<button class="btn btn-success">Done</button>
 						</div>
 						<p class="mb-1"><%=t.getTodo_details()%></p>
-						<small><%
-						SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
-						Date d2 = sdf2.parse(t.getTodo_date());
-						String date = new SimpleDateFormat("EEE, MMM d, yyyy").format(d2);
-						out.print(date);
-						
-						%> || <%
-						SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-						Date d = sdf.parse(t.getTodo_time());
-						String time = new SimpleDateFormat("hh:mm aa").format(d);
-						out.print(time);
-						%></small>
+						<small>
+							<%
+							SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+							Date d2 = sdf2.parse(t.getTodo_date());
+							String date = new SimpleDateFormat("EEE, MMM d, yyyy").format(d2);
+							out.print(date);
+							%> || <%
+							SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+							Date d = sdf.parse(t.getTodo_time());
+							String time = new SimpleDateFormat("hh:mm aa").format(d);
+							out.print(time);
+							%>
+						</small>
 					</div>
 
 					<%

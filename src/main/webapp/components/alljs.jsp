@@ -6,3 +6,12 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
 	integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
 	crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/fa8c3d741e.js"
+	crossorigin="anonymous"></script>
+	
+<script>
+document.getElementById("refresh_loader").addEventListener("click",()=>{
+	document.getElementById("refresh_loader").classList.add("spinner-border");
+	location.reload();
+})
+</script>
