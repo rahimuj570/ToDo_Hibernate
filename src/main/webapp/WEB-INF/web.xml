@@ -54,6 +54,12 @@
   	<description></description>
   	<servlet-class>servlets.DoneTask</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>DeleteTask</servlet-name>
+  	<display-name>DeleteTask</display-name>
+  	<description></description>
+  	<servlet-class>servlets.DeleteTask</servlet-class>
+  </servlet>
 
   <servlet-mapping>
   	<servlet-name>RegisterServlet</servlet-name>
@@ -78,6 +84,10 @@
   <servlet-mapping>
   	<servlet-name>DoneTask</servlet-name>
   	<url-pattern>/DoneTask</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>DeleteTask</servlet-name>
+  	<url-pattern>/DeleteTask</url-pattern>
   </servlet-mapping>
 
 

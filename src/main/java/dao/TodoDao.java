@@ -55,6 +55,30 @@ public class TodoDao {
 		return todos;
 	}
 	
+	public void deleteTodo(int todo_id) {
+		if(todo_id==0) {
+			
+		}else {
+			SessionFactory sf = new HibernateFactory().getFactory();
+			Session s = sf.openSession();
+			Todo todo = s.get(Todo.class, todo_id);
+			Transaction tx = s.beginTransaction();
+			s.remove(todo);
+			tx.commit();
+			s.close();
+		}
+	}
+
+	public ArrayList<Todo> getCompletedTodo(int uid) {
+		ArrayList<Todo> todos = new ArrayList<Todo>();
+		SessionFactory sf = new HibernateFactory().getFactory();
+		Session s = sf.openSession();
+		Query q = s.createQuery("from Todo t where t.isDone=true", Todo.class);
+		todos = (ArrayList<Todo>) q.list();
+		s.close();
+		return todos;
+	}
+
 	public void doneTodo(int todo_id) {
 		SessionFactory sf = new HibernateFactory().getFactory();
 		Session s = sf.openSession();
@@ -70,7 +94,7 @@ public class TodoDao {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat sdf2 = new SimpleDateFormat("HH:MM");
 		Date d = new Date();
-		d.setTime(d.getTime()+24*60*60*1000);
+		d.setTime(d.getTime() + 24 * 60 * 60 * 1000);
 		String newDate = sdf.format(d);
 		String newTime = sdf2.format(d);
 
