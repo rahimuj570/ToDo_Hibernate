@@ -30,6 +30,7 @@ public class DeleteTask extends HttpServlet {
 		String task_id=request.getParameter("task_id");
 		int taskId=Integer.parseInt(task_id);
 		new TodoDao().deleteTodo(taskId);
+		response.sendRedirect("completed_tasks.jsp");
 	}
 
 	/**

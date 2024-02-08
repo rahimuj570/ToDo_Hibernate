@@ -56,17 +56,20 @@ public class TodoDao {
 	}
 	
 	public void deleteTodo(int todo_id) {
+		SessionFactory sf = new HibernateFactory().getFactory();
+		Session s = sf.openSession();
 		if(todo_id==0) {
-			
+			MutationQuery q = s.createMutationQuery("delete Todo where isDone=true");
+			Transaction tx = s.beginTransaction();
+			q.executeUpdate();
+			tx.commit();
 		}else {
-			SessionFactory sf = new HibernateFactory().getFactory();
-			Session s = sf.openSession();
 			Todo todo = s.get(Todo.class, todo_id);
 			Transaction tx = s.beginTransaction();
 			s.remove(todo);
 			tx.commit();
-			s.close();
 		}
+		s.close();
 	}
 
 	public ArrayList<Todo> getCompletedTodo(int uid) {
