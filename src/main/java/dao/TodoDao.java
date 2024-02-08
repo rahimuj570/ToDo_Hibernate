@@ -49,7 +49,8 @@ public class TodoDao {
 		ArrayList<Todo> todos = new ArrayList<Todo>();
 		SessionFactory sf = new HibernateFactory().getFactory();
 		Session s = sf.openSession();
-		Query q = s.createQuery("from Todo t where t.isExpired=true", Todo.class);
+		Query q = s.createQuery("from Todo t where t.isExpired=true and t.user_id=:uid", Todo.class);
+		q.setParameter("uid", uid);
 		todos = (ArrayList<Todo>) q.list();
 		s.close();
 		return todos;
@@ -88,7 +89,8 @@ public class TodoDao {
 		ArrayList<Todo> todos = new ArrayList<Todo>();
 		SessionFactory sf = new HibernateFactory().getFactory();
 		Session s = sf.openSession();
-		Query q = s.createQuery("from Todo t where t.isDone=true", Todo.class);
+		Query q = s.createQuery("from Todo t where t.isDone=true and t.user_id=:uid", Todo.class);
+		q.setParameter("uid", uid);
 		todos = (ArrayList<Todo>) q.list();
 		s.close();
 		return todos;
