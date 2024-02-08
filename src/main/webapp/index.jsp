@@ -57,13 +57,14 @@
 						<i class="fa-solid fa-rotate-right fa-2xl"></i>
 					</div>
 				</center>
-				<div class="list-group">
+				<div class="list-group mt-2 mb-5">
 
 					<%
 					Users u = (Users) session.getAttribute("current_user");
 
 					TodoDao dao = new TodoDao();
 					ArrayList<Todo> todos = dao.getAllTodo(u.getUser_id());
+					if(todos.isEmpty())out.print("<center class=\"mt-2\">0 pending Task</center>");
 					for (Todo t : todos) {
 					%>
 
