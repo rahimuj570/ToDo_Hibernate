@@ -9,6 +9,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.MutationQuery;
 import org.hibernate.query.Query;
 
 import entities.Todo;
@@ -20,7 +21,7 @@ public class TodoDao {
 		boolean f = false;
 		Date currentDate = new Date();
 		String prevDateinString = date + " " + time;
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		Date prevDate;
 		try {
 			prevDate = sdf.parse(prevDateinString);
@@ -46,18 +47,35 @@ public class TodoDao {
 
 	public ArrayList<Todo> getAllTodo(int uid) {
 		ArrayList<Todo> todos = new ArrayList<Todo>();
+		ArrayList<Todo> finalTodos = new ArrayList<Todo>();
 
 		SessionFactory sf = new HibernateFactory().getFactory();
 		Session s = sf.openSession();
-		String query = "from Todo t where t.user_id=:user_id";
+		String query = "from Todo t where t.user_id=:user_id and t.isExpired =false and t.isDone=false";
 		Query q = s.createQuery(query, Todo.class);
 		q.setParameter("user_id", uid);
 		todos = (ArrayList<Todo>) q.list();
 		s.close();
+		for(Todo t: todos) {
+			if(isExpired(t.getTodo_date(), t.getTodo_time())) {
+				System.out.println("tttttttttt");
+				Session s2= sf.openSession();
+				String query2="update Todo set isExpired=:t where todo_id=:todo_id";
+				MutationQuery q2 = s2.createMutationQuery(query2);
+				q2.setParameter("todo_id", t.getTodo_id());
+				q2.setParameter("t", true);
+				Transaction tx= s2.beginTransaction();
+				q2.executeUpdate();
+				tx.commit();
+				s2.close();
+			}else {
+				finalTodos.add(t);
+			}
+		}
 
-		System.out.println(isExpired("2023/07/09", "10:00"));
+//		System.out.println(isExpired("2023/07/09", "10:00"));
 
-		return todos;
+		return finalTodos;
 	}
 
 }
