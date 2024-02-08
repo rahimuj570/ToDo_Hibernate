@@ -1,3 +1,6 @@
+<%@page import="org.hibernate.internal.build.AllowSysOut"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="entities.Users"%>
 <%@page import="entities.Todo"%>
 <%@page import="java.util.ArrayList"%>
@@ -66,7 +69,18 @@
 							<button class="btn btn-success">Done</button>
 						</div>
 						<p class="mb-1"><%=t.getTodo_details()%></p>
-						<small><%=t.getTodo_date()%> ; <%=t.getTodo_time()%></small>
+						<small><%
+						SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+						Date d2 = sdf2.parse(t.getTodo_date());
+						String date = new SimpleDateFormat("EEE, MMM d, yyyy").format(d2);
+						out.print(date);
+						
+						%> || <%
+						SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+						Date d = sdf.parse(t.getTodo_time());
+						String time = new SimpleDateFormat("hh:mm aa").format(d);
+						out.print(time);
+						%></small>
 					</div>
 
 					<%
