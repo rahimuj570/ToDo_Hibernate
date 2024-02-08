@@ -44,6 +44,17 @@ public class TodoDao {
 		tx.commit();
 		s.close();
 	}
+	
+	
+	public ArrayList<Todo> getExpiredTodo(int uid){
+		ArrayList<Todo>todos=new ArrayList<Todo>();
+		SessionFactory sf = new HibernateFactory().getFactory();
+		Session s= sf.openSession();
+		Query q= s.createQuery("from Todo t where t.isExpired=true",Todo.class);
+		todos=(ArrayList<Todo>) q.list();
+		s.close();
+		return todos;
+	}
 
 	public ArrayList<Todo> getAllTodo(int uid) {
 		ArrayList<Todo> todos = new ArrayList<Todo>();

@@ -51,12 +51,12 @@
 
 		<div class="row">
 			<div class="col-md-8 mx-auto mt-5">
-				<center>
+				<div class="text-center">
 					<h3 class="mb-2">Pending Task</h3>
 					<div id="refresh_loader"  style="cursor:pointer;">
 						<i class="fa-solid fa-rotate-right fa-2xl"></i>
 					</div>
-				</center>
+				</div>
 				<div class="list-group mt-2 mb-5">
 
 					<%

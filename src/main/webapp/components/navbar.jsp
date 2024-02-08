@@ -20,12 +20,14 @@
 						<li><a class="dropdown-item" href="#">Another action</a></li>
 						<li><hr class="dropdown-divider"></li>
 						<li><a class="dropdown-item" href="#">Something else here</a></li>
+						<%
+						if (session.getAttribute("current_user") != null) {
+						%>
 					</ul></li>
-				<li class="nav-item"><a class="nav-link" href="#">Missed Tasks</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Completed Tasks</a></li>
-				<%
-				if (session.getAttribute("current_user") != null) {
-				%>
+				<li class="nav-item"><a class="nav-link"
+					href="missed_tasks.jsp">Missed Tasks</a></li>
+				<li class="nav-item"><a class="nav-link" href="completed_tasks.jsp">Completed
+						Tasks</a></li>
 				<li class="nav-item"><a class="nav-link" href="LogoutServlet">Logout</a></li>
 				<%
 				} else {
