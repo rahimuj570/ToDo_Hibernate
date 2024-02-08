@@ -29,6 +29,7 @@ public class DoneTask extends HttpServlet {
 		// TODO Auto-generated method stub
 		String todo_id=request.getParameter("todo_id");
 		new TodoDao().doneTodo(Integer.parseInt(todo_id));
+		response.sendRedirect("index.jsp");
 	}
 
 	/**

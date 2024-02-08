@@ -18,6 +18,10 @@
   	<filter-name>CurrentUserFilter</filter-name>
   	<url-pattern>/missed_tasks.jsp</url-pattern>
   </filter-mapping>
+  <filter-mapping>
+  	<filter-name>CurrentUserFilter</filter-name>
+  	<url-pattern>/completed_tasks.jsp</url-pattern>
+  </filter-mapping>
   <servlet>
   	<servlet-name>RegisterServlet</servlet-name>
   	<display-name>RegisterServlet</display-name>
