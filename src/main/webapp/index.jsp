@@ -60,14 +60,22 @@
 				<div class="list-group mt-2 mb-5">
 
 					<%
-					String targetDate="0";
+					String targetDate = "0";
+					String search = "0";
 					if (request.getParameter("targetDate") == null)
 						targetDate = "0";
-					else targetDate= request.getParameter("targetDate");
+					else
+						targetDate = request.getParameter("targetDate");
+					
+					if (request.getParameter("search") == null)
+						search = "0";
+					else
+						search = request.getParameter("search");
+					
 					Users u = (Users) session.getAttribute("current_user");
 
 					TodoDao dao = new TodoDao();
-					ArrayList<Todo> todos = dao.getAllTodo(u.getUser_id(), targetDate);
+					ArrayList<Todo> todos = dao.getAllTodo(u.getUser_id(), targetDate, search);
 					if (todos.isEmpty())
 						out.print("<center class=\"mt-2\">0 pending Task</center>");
 					for (Todo t : todos) {

@@ -59,7 +59,9 @@ public class TodoDao {
 		ArrayList<String> alldate = new ArrayList<String>();
 		SessionFactory sf = new HibernateFactory().getFactory();
 		Session s = sf.openSession();
-		Query q = s.createQuery("select distinct t.todo_date from Todo t where t.user_id=:uid and t.isExpired=false and t.isDone=false", Todo.class);
+		Query q = s.createQuery(
+				"select distinct t.todo_date from Todo t where t.user_id=:uid and t.isExpired=false and t.isDone=false",
+				Todo.class);
 		q.setParameter("uid", uid);
 		alldate = (ArrayList<String>) q.list();
 		return alldate;
@@ -125,22 +127,32 @@ public class TodoDao {
 		return res;
 	}
 
-	public ArrayList<Todo> getAllTodo(int uid, String targetDate) {
+	public ArrayList<Todo> getAllTodo(int uid, String targetDate, String search) {
 		ArrayList<Todo> todos = new ArrayList<Todo>();
 		ArrayList<Todo> finalTodos = new ArrayList<Todo>();
 
 		SessionFactory sf = new HibernateFactory().getFactory();
 		Session s = sf.openSession();
 		String query = null;
-		if (targetDate.equals("0")) {
+		if (targetDate.equals("0") && search.equals("0")) {
 			query = "from Todo t where t.user_id=:user_id and t.isExpired =false and t.isDone=false";
 		} else {
-			query = "from Todo t where t.todo_date=:targetDate and t.user_id=:user_id and t.isExpired =false and t.isDone=false";
+
+			if (!search.equals("0")) {
+				query = "from Todo t where t.user_id=:user_id and t.isExpired =false and t.isDone=false and t.todo_headline like :search";
+			} else {
+				query = "from Todo t where t.todo_date=:targetDate and t.user_id=:user_id and t.isExpired =false and t.isDone=false";
+			}
 		}
+
 		Query q = s.createQuery(query, Todo.class);
 		q.setParameter("user_id", uid);
 		if (!targetDate.equals("0"))
 			q.setParameter("targetDate", targetDate);
+		if (!search.equals("0")) {
+			String srch = "%"+search+"%";
+			q.setParameter("search", srch);
+		}
 		todos = (ArrayList<Todo>) q.list();
 		s.close();
 		for (Todo t : todos) {
